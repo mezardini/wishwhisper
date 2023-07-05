@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Your description">
+        <meta name="author" content="Your name">
+
+        <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+        <meta property="og:site_name" content="" /> <!-- website name -->
+        <meta property="og:site" content="" /> <!-- website link -->
+        <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+        <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+        <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+        <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+        <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+
+        <!-- Webpage Title -->
+        <title>Oxos - ReceiptMkr</title>
+        
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/fontawesome-all.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        
+        <!-- Favicon  -->
+        <link rel="icon" href="{% static 'images/favicon.svg' %}">
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#navbarExample">
+        
+        <!-- Navigation -->
+        <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+            <div class="container">
+
+                <!-- Image Logo -->
+                <a class="navbar-brand logo-image" href="">WishWhisper</a> 
+
+                <!-- Text Logo - Use this if you don't have a graphic logo -->
+                
+
+                <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation" aria-expanded="false">
+                    <span class=""><a class="btn-outline-sm" href="">Sign In </a></span>
+                </button>
+
+                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#header">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#details">Details</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contactus">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Documentation</a>
+                          </li> -->
+                    </ul>
+                    <span class="nav-item">
+                        
+                        <a class="btn-solid-sm" href="{% url 'wishpage' %}">Preview</a>
+                        
+                    </span>
+                    <span class="nav-item">
+                        
+                        <a class="btn-outline-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create wish</a>
+                        
+                    </span>
+                </div> <!-- end of navbar-collapse -->
+            </div> <!-- end of container -->
+        </nav> <!-- end of navbar -->
+        <!-- end of navigation -->
+
+        
+        <!-- Header -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h1 class="h1-large" style="color: #000000;">Send <span class="replace-me">shoutouts</span> and congratulatory messages to your friends </h1>
+                            <!-- <p class="p-large">Elevate your customer experience with beautifully designed receipts</p> -->
+                            <span class=""><a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Buy receipts</a></span>
+                      <div id="staticBackdrop" class="modal fade" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="row">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                     <!-- end of col -->
+                                    <div class="col-lg-12">
+                                      <form action="" method="post">
+                                        {% csrf_token%}
+                                        <div class="form-group ">
+                                          <div class="form-group col-md-12">
+                                                <div class="input-group">
+                                                  <label class="input-group-text" required for="inputGroupSelect02">Choose plan</label>
+                                                    <select class="custom-select" name="template_choice" id="inputGroupSelect02" required>
+                                                      
+                                                      <option value="silver">Silver - $20 per month, 150 receipts</option>
+                                                      <option value="gold" selected="selected" >Gold - $50 per month, 500 receipts</option>
+                                                      <option value="platinum">Platinum - $100 per month, 1500 receipts</option>
+                                                    </select>
+                                                    
+                                                  </div>
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">First Name</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="biz_name" placeholder="John" aria-label="Username" aria-describedby="basic-addon1">
+                                              </div> 
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">Last Name</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="biz_name" placeholder="Doe" aria-label="Username" aria-describedby="basic-addon1">
+                                              </div> 
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">Mobile Number</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="biz_name" placeholder="+12345679866" aria-label="mobileNum" aria-describedby="basic-addon1">
+                                              </div> 
+                                          </div>
+                                          <div class="form-group col-md-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">Email Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="biz_name" value="{{user.email}}" placeholder="{{user.email}}" aria-label="Username" aria-describedby="basic-addon1">
+                                              </div> 
+                                          </div>
+                                         
+                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Example textarea</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                          </div>
+                                        
+                                      <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn btn-primary">Proceed to pay</button>
+                                      </div>
+                                      </form> 
+                                   
+                                    </div> <!-- end of col -->
+                                </div> <!-- end of row -->
+                            </div> <!-- end of modal-content -->
+                        </div> <!-- end of modal-dialog -->
+                      </div>
+                            
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <div class="image-container">
+                            <!-- <img class="img-fluid" src="{% static 'images/undraw_online_wishes_dlmr.svg' %}" alt="alternative" width="500"> -->
+                        </div> <!-- end of image-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </header> <!-- end of header -->
+        <!-- end of header -->
+
+
+        <!-- Footer -->
+        <!-- end of footer -->  
+        <!-- end of footer -->
+
+   
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="text-center">
+                    <p style="color: black;">WISHWHISPER</p>
+                </div><!-- end of col -->
+                </div> <!-- enf of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of copyright --> 
+        <!-- end of copyright -->
+        
+
+        <!-- Back To Top Button -->
+        <button onclick="topFunction()" id="myBtn">
+            <img src="{% static 'images/up-arrow.png' %}" alt="alternative">
+        </button>
+        <!-- end of back to top button -->
+            
+        <!-- Scripts -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+        <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+        <script src="{% static 'js/purecounter.min.js' %}"></script> <!-- Purecounter counter for statistics numbers -->
+        <script src="{% static 'js/replaceme.min.js' %}"></script> <!-- ReplaceMe for rotating text -->
+        <script src="{% static 'js/scripts.js' %}"></script> <!-- Custom scripts -->
+        
+    </body>
+</html>

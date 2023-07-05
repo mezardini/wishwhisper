@@ -1,0 +1,367 @@
+{% load static %}
+
+<style>
+    /* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+.slider_section {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.slider_item-box {
+  width: 100%;
+  height: 100%;
+}
+
+.slider_item-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+          
+}
+
+.slider_item-detail {
+  text-align: center;
+  color: #fff;
+  padding-bottom: 75px;
+  position: fixed;
+  bottom: 0;
+
+  
+}
+
+.slider_item-detail h1 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.5);
+}
+ @media (min-width: 768px) {
+  .slider_item-detail h1 {
+    font-size: 2.5rem; 
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+ 
+
+.slider_item-detail h1 span {
+  font-size: 4.5rem;
+  text-transform: none;
+}
+
+.slider_item-detail form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 45px;
+}
+
+.slider_item-detail form input {
+  width: 75%;
+  height: 45px;
+  padding-left: 15px;
+  line-height: 45px;
+  outline: none;
+  border: none;
+}
+
+.slider_item-detail form input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.slider_item-detail form input:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.slider_item-detail form input::-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.slider_item-detail form input::placeholder {
+  font-size: 14px;
+}
+
+.slider_item-detail form button {
+  height: 45px;
+  line-height: 45px;
+  background-color: #252525;
+  color: #ffffff;
+  padding: 0 30px;
+  border: none;
+  outline: none;
+  font-family: 'Baloo Chettan', cursive;
+}
+
+.slider_item-detail a {
+  display: inline-block;
+  padding: 12px 50px;
+  background-color: #f7e6f6;
+  border: 1px solid #f7e6f6;
+  color: #3a3a3a;
+  border-radius: 40px;
+  margin: 45px 0 75px 0;
+}
+
+.slider_item-detail a:hover {
+  background-color: transparent;
+  color: #f7e6f6;
+}
+
+.slider_section #carouselExampleIndicators,
+.slider_section .carousel-inner,
+.slider_section .carousel-item {
+  height: 100%;
+}
+
+.slider_section .carousel-control-prev,
+.slider_section .carousel-control-next {
+  position: absolute;
+  top: initial;
+  left: 2%;
+  width: 45px;
+  height: 45px;
+  border: none;
+  opacity: 1;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  background-position: center;
+  background-color: #fff;
+}
+
+.slider_section .carousel-control-prev:hover,
+.slider_section .carousel-control-next:hover {
+  background-color: #000;
+  background-size: 12px;
+}
+
+.slider_section .carousel-control-prev {
+  background-image: url(../images/left-black-arrow.png);
+  bottom: 175px;
+}
+
+.slider_section .carousel-control-next {
+  background-image: url(../images/right-black-arrow.png);
+  bottom: 125px;
+}
+
+.slider_section .carousel-control-prev:hover {
+  background-image: url(../images/prev.png);
+}
+
+.slider_section .carousel-control-next:hover {
+  background-image: url(../images/next.png);
+}
+
+.slider_section .carousel-indicators {
+  bottom: -25px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin: 0;
+  right: -14%;
+  width: 200px;
+  margin-left: auto;
+}
+
+.slider_section .carousel-indicators li {
+  text-indent: initial;
+  background-color: transparent;
+  text-align: center;
+  font-size: 16px;
+  line-height: 10px;
+  display: none;
+  color: #ffffff;
+}
+
+.slider_section .carousel-indicators li.active {
+  display: block;
+}
+</style>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>WishBox</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'scss/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <!-- <link href="css/style.css" rel="stylesheet" /> -->
+  <!-- responsive style -->
+  <link href="{% static 'scss/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- The video -->
+<video autoplay muted loop id="myVideo">
+    <source src="{% static 'videos/rain.mp4' %}" type="video/mp4">
+  </video>
+  
+  <!-- Optional: some overlay text to describe the video -->
+  <section class=" slider_section position-relative">
+
+    <div class="container">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <!-- <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">01</li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1">02</li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2">03</li>
+        </ol> -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="slider_item-box">
+              <div class="slider_item-container">
+                <div class="content">
+                  <h1>
+                    Happy Birthday, Sandra! Wishing you a day filled with joy, laughter, and beautiful moments. May this special 
+                    day bring you happiness and may the year ahead be filled with success, love, 
+                    and all your heart's desires. Cheers to another amazing journey around the sun! Have a fantastic birthday
+                  </h1>
+                  <div>
+                    
+                  </div>
+                  <div class="text-center">
+                    <button class="btn-outline-sm " href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span >Next</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="slider_item-box">
+              <div class="slider_item-container">
+                <div class="slider_item-detail">
+                  <h1>
+                    Make Best <br />
+                    <span>Your Website</span>
+                  </h1>
+                  <div>
+                    
+                  </div>
+                  <div>
+                    <a  href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span >Next</span>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="slider_item-box">
+              <div class="slider_item-container">
+                <div class="slider_item-detail">
+                   
+                  <h1>
+                    Make Best <br />
+                    <span>Your Website</span>
+                  </h1>
+                    
+                  <div>
+                    
+                  </div>
+                  <div>
+                    <a  href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span >Next</span>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  
+
+
+
+  <script type="text/javascript" src="{% static 'sjs/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'sjs/bootstrap.js' %}"></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document
+        .querySelector(".custom_menu-btn")
+        .classList.toggle("menu_btn-style");
+    }
+  </script>
+</body>
+
+</html>
